@@ -1,0 +1,12 @@
+#!/bin/bash
+mv time_series_covid19_deaths_global.csv time_series_covid19_deaths_global.csv.old
+mv hopitaux.csv hopitaux.csv.old
+mv tests.csv tests.csv.old
+mv deces.csv deces.csv.old
+wget https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7
+mv 63352e38-d353-4b54-bfd1-f1b3ee1cabd7 hopitaux.csv
+wget https://www.data.gouv.fr/fr/datasets/r/406c6a23-e283-4300-9484-54e78c8ae675
+mv 406c6a23-e283-4300-9484-54e78c8ae675 tests.csv
+wget https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv
+grep "France,46.22" time_series_covid19_deaths_global.csv > deces.csv
+
