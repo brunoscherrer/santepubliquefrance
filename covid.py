@@ -47,14 +47,22 @@ def get_data_from_files():
                     add_key(deps, dp)
                     add_key(genres, g)
                     add_key(dates, d)
-            line_count+=1
-            
-    print(len(deps),"départements,",len(genres),"genres,",len(dates),"dates")
+            line_count+=1                           
 
     print("Données hopitaux")
-    
+
+     # fix erreur fichier santepubliquefrance date manquante 2020-10-15
+    FIX=False
+    if "2020-10-15" not in dates:
+        print("!!! Correction donnée manquante 2020-10-15 !!!")
+        i=dates.index("2020-10-16")
+        dates=dates[0:i]+["2020-10-15"]+dates[i:]
+        FIX=True
+
+    print(len(deps),"départements,",len(genres),"genres,",len(dates),"dates")
+        
     data = np.zeros( (len(deps), len(genres), len(dates), 4) )
-    
+   
     with open(file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
         line_count = 0
@@ -67,6 +75,12 @@ def get_data_from_files():
                     data[ deps.index(dp), genres.index(g), dates.index(d) ] = [ r[0], r[1], r[2], r[3] ]
             line_count+=1
 
+    # fix erreur fichier santepubliquefrance
+    if FIX:
+        i=dates.index("2020-10-15")
+        data[ :,:,i ] = data[ :,:,i-1]
+        
+    
             
     print("Données population")
 
@@ -100,7 +114,7 @@ def get_data_from_files():
     file = "tests.csv"
     
     tests = np.zeros( (len(deps), len(dates), 2) )
-
+    
     with open(file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
         line_count = 0
@@ -441,7 +455,7 @@ def plot_deces( titre, size=5 ):
     if NO_PLOT:
         return
     
-    print("Récupération des données décès en France")
+    print("Données décès en France")
     file = "deces.csv"
     with open(file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -482,20 +496,23 @@ def plot_deces( titre, size=5 ):
     deces = [ max(deces[i],a[i]) for i in range(len(deces)) ]
     plt.fill_between(xr, a, deces, color="black", alpha=0.4, label="Hors hôpital (JHU CSSE)")
     plt.plot(xr, deces, color="black", lw=1)
-    
-    
+        
     plt.legend(loc='upper left', fontsize=9)
 
-    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+2,1) ]
+    # Nombre de données à supprimer:
+    NDS = 1
+    
+    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,-NDS) ]
 
+    a = a[:ld-NDS] # suppression dernière donnée
     s_a = smooth(a)
-    d_a= [a[i+1]-a[i] for i in range(ld-1)]
-    d_s_a = [s_a[i+1]-s_a[i] for i in range(ld-1)]
+    d_a = [a[i+1]-a[i] for i in range(ld-NDS-1)]
+    d_s_a = [s_a[i+1]-s_a[i] for i in range(ld-NDS-1)]
 
-    deces = [deces[i]-a[i] for i in range(ld)]
+    deces = [deces[i]-a[i] for i in range(ld-NDS)]
     s_deces = smooth(deces)
-    d_deces = [deces[i+1]-deces[i] for i in range(ld-1)]
-    d_s_deces = [s_deces[i+1]-s_deces[i] for i in range(ld-1)]
+    d_deces = [deces[i+1]-deces[i] for i in range(ld-NDS-1)]
+    d_s_deces = [s_deces[i+1]-s_deces[i] for i in range(ld-NDS-1)]
     
     # graphe du centre et de droite
     for z in [2,3]:
@@ -506,15 +523,14 @@ def plot_deces( titre, size=5 ):
 
         if z==2:
             plt.title("Nombre de décès par jour à l'hôpital et hors hôpital")
-            plt.ylim(0,1100)
+            plt.ylim(0,1500)
         else:
             plt.title("Nombre de décès par jour à l'hôpital et hors hôpital (échelle log)")
             plt.yscale('log')
-            plt.ylim(6,1100)
+            plt.ylim(6,1500)
         
         plt.grid(True, which="both")
-
-
+        
         plt.plot(xr, d_a, "+", color="crimson")
         plt.plot(xr, d_s_a, color="crimson", lw=1, label="Nombre de décès à l'hôpital")
 
