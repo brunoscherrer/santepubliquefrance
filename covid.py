@@ -725,8 +725,8 @@ def cartes():
     zmax['mortalite']=30
     zmin['deces']=0
     zmax['incid'] = 250
-    zmin['var_incid'] = -30
-    zmax['var_incid'] = 30
+    zmin['var_incid'] = -40
+    zmax['var_incid'] = 40
     zmin['var_posit'] = -4
     zmax['var_posit'] = 4
     zmax['tension'] = 100
