@@ -719,19 +719,19 @@ def cartes():
             zmin[x],zmax[x] = -zz,zz
     
     zmin['nouv_hosp']=0 # petite correction des incohérences des fichiers Santé Publique France!
-    zmax['tension']=100 # bloque à 300% le max
+    #zmax['tension']=100 # bloque à 300% le max
     zmin['lits_rea']=0
-    zmax['lits_rea']=20
+    #zmax['lits_rea']=20
     zmax['mortalite']=30
     zmin['deces']=0
-    zmax['incid'] = 250
-    zmin['var_incid'] = -50
-    zmax['var_incid'] = 50
-    zmin['var_posit'] = -4
-    zmax['var_posit'] = 4
+    #zmax['incid'] = 250
+    #zmin['var_incid'] = -50
+    #zmax['var_incid'] = 50
+    #zmin['var_posit'] = -4
+    #zmax['var_posit'] = 4
     zmax['tension'] = 100
     zmin['posit'] = 0
-    zmax['posit'] = min(zmax['posit'],15)
+    #zmax['posit'] = min(zmax['posit'],15)
     
     print("Génération des cartes de France (fixes)")
         
