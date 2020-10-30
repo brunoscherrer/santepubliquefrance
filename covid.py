@@ -724,14 +724,14 @@ def cartes():
     #zmax['lits_rea']=20
     zmax['mortalite']=30
     zmin['deces']=0
-    #zmax['incid'] = 250
-    #zmin['var_incid'] = -50
-    #zmax['var_incid'] = 50
-    #zmin['var_posit'] = -4
-    #zmax['var_posit'] = 4
+    zmax['incid'] = 600
+    zmin['var_incid'] = -30
+    zmax['var_incid'] = 30
+    zmin['var_posit'] = -20
+    zmax['var_posit'] = 20
     zmax['tension'] = 100
     zmin['posit'] = 0
-    #zmax['posit'] = min(zmax['posit'],15)
+    zmax['posit'] = min(zmax['posit'],25)
     
     print("Génération des cartes de France (fixes)")
         
