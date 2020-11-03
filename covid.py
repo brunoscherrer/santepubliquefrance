@@ -580,7 +580,7 @@ def my_map(f, data):
 
 def smooth(f, sm=20, c=3.0):
     lf=len(f)
-    return([ np.mean(f[ max(0,t-3): min(t+4,lf) ]) for t in range(lf) ])
+    return([ np.mean(f[ max(0,t-6): min(t+1,lf) ]) for t in range(lf) ])
     
 
 def smooth_old(f, sm=20, c=3.0):
