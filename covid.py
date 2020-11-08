@@ -578,7 +578,7 @@ def my_map(f, data):
     return data2
 
 
-SMOOTH = 3
+SMOOTH = 7
 
 def smooth(f, sm=20, c=3.0):
     lf=len(f)
