@@ -19,6 +19,7 @@ from unidecode import unidecode
 from france import REGIONS, DEPARTEMENTS, plot_france
 
 
+
 def add_key(l,x):
     if not (x in l):
         l.append(x)
@@ -271,21 +272,21 @@ def plot( endroit, total, titre, size=5 ):
             if z==1: # real data
                 if len(zones)>1:
                     args = { "color":coul[nc], 'lw':1 }
-                    plt.plot(xr, (c[:,0]+c[:,2]+c[:,3])/popx, "+", markersize=4, **args)
+                    plt.plot(xr, (c[:,0]+c[:,2]+c[:,3])/popx, "o", markersize=2, **args)
                 else:
-                    plt.plot(xr, c[:,0]+c[:,2]+c[:,3], "+", markersize=4, color='black')
+                    plt.plot(xr, c[:,0]+c[:,2]+c[:,3], "o", markersize=2, color='black')
                     plt.plot(xr, c[:,0], "o", markersize=2, color='blue')
-                    plt.plot(xr, c[:,1], "x", markersize=4, color='crimson')
-                    plt.plot(xr, -c[:,2], "+", markersize=4, color='forestgreen')
+                    plt.plot(xr, c[:,1], "o", markersize=2, color='crimson')
+                    plt.plot(xr, -c[:,2], "o", markersize=2, color='forestgreen')
                     plt.plot(xr, -c[:,3], "o", markersize=2, color='mediumvioletred')
             else:
                 if nc==0 and len(zones)==1:
                     args = { 'lw':1, "path_effects":[path_effects.Stroke(linewidth=2, foreground='white'), path_effects.Normal()] }
                     plt.plot(xr, c[:,0]+c[:,2]+c[:,3], "-", color='black', label="Nouvelles hospitalisations", **args)
-                    plt.plot(xr, c[:,0], "--", color='blue', label="Variation du nb de personnes hospitalisées", **args)
-                    plt.plot(xr, c[:,1], "--", color='crimson', label="Variation du nb de personnes en réanimation", **args)
-                    plt.plot(xr, -c[:,2], "-", color='forestgreen', label="- Nb de retours à domicile", **args)
+                    plt.plot(xr, c[:,0], "-", color='blue', label="Variation du nb de personnes hospitalisées", **args)
+                    plt.plot(xr, c[:,1], "-", color='crimson', label="Variation du nb de personnes en réanimation", **args)
                     plt.plot(xr, -c[:,3], "-", color='mediumvioletred', label="- Nb de décès", **args)
+                    plt.plot(xr, -c[:,2], "-", color='forestgreen', label="- Nb de retours à domicile", **args)
                 else:
                     args = { "color":coul[nc], "path_effects":[path_effects.Stroke(linewidth=2, foreground='white'), path_effects.Normal()]  }
                     plt.plot(xr, (c[:,0]+c[:,2]+c[:,3])/popx, "-", **args, label=x, lw=1)
@@ -395,7 +396,7 @@ def plot( endroit, total, titre, size=5 ):
             plt.plot(xr2,c2s, "-", **args, label=x, lw=1)
         else:
             plt.plot(xr2,c2s, "-", **args, label="Taux d'incidence (J-6 $\\rightarrow$ J)", lw=1)
-            plt.plot(xr,7*np.array(c), "+", markersize=4, **args, alpha=0.5)
+            plt.plot(xr,7*np.array(c), "o", markersize=2, **args, alpha=0.5)
             plt.plot(xr,7*np.array(cs), "--", **args, label="$7\\times$nombre de cas", lw=1, alpha=0.5)
         nc+=1
     plt.grid(True, which="both")
@@ -507,12 +508,12 @@ def plot_deces( titre, size=5 ):
     a = a[:ld-NDS] # suppression dernière donnée
     s_a = smooth(a)
     d_a = [a[i+1]-a[i] for i in range(ld-NDS-1)]
-    d_s_a = [s_a[i+1]-s_a[i] for i in range(ld-NDS-1)]
+    s_d_a = smooth(d_a)#[d_a[i+1]-d_a[i] for i in range(ld-NDS-1)]
 
     deces = [deces[i]-a[i] for i in range(ld-NDS)]
     s_deces = smooth(deces)
     d_deces = [deces[i+1]-deces[i] for i in range(ld-NDS-1)]
-    d_s_deces = [s_deces[i+1]-s_deces[i] for i in range(ld-NDS-1)]
+    s_d_deces = smooth(d_deces)#[d_deces[i+1]-d_deces[i] for i in range(ld-NDS-1)]
     
     # graphe du centre et de droite
     for z in [2,3]:
@@ -531,14 +532,14 @@ def plot_deces( titre, size=5 ):
         
         plt.grid(True, which="both")
         
-        plt.plot(xr, d_a, "+", color="crimson")
-        plt.plot(xr, d_s_a, color="crimson", lw=1, label="Nombre de décès à l'hôpital")
+        plt.plot(xr, d_a, "o", markersize=2, color="crimson")
+        plt.plot(xr, s_d_a, color="crimson", lw=1, label="Nombre de décès à l'hôpital")
 
-        plt.plot(xr, d_deces, "x", color="black")
-        plt.plot(xr, d_s_deces, color="black",lw=1, label='Nombre de décès hors hôpital')
+        plt.plot(xr, d_deces, "o", markersize=2, color="black")
+        plt.plot(xr, s_d_deces, color="black",lw=1, label='Nombre de décès hors hôpital')
 
-        plt.plot(xr, np.array(d_a) + np.array(d_deces), ".", color="blue")
-        plt.plot(xr, np.array(d_s_a) + np.array(d_s_deces), color="blue",lw=1, label='Total (JHU CSSE)')
+        plt.plot(xr, np.array(d_a) + np.array(d_deces), "o", markersize=2, color="blue")
+        plt.plot(xr, np.array(s_d_a) + np.array(s_d_deces), color="blue",lw=1, label='Total (JHU CSSE)')
 
         plt.legend(loc='upper right', fontsize=9)
 
@@ -568,7 +569,6 @@ def clean_string(s): # enlève tous les caractères spéciaux
 
 
 def my_map(f, data):
-
     data2 = data.copy()
     for i in range(len(deps)):
         for j in range(len(genres)):
@@ -578,47 +578,29 @@ def my_map(f, data):
     return data2
 
 
+SMOOTH = 3
+
 def smooth(f, sm=20, c=3.0):
     lf=len(f)
-    return([ np.mean(f[ max(0,t-6): min(t+1,lf) ]) for t in range(lf) ])
+    sf=[]
+    for t in range(lf):
+        ll=f[ max(0,t-SMOOTH): min(t+SMOOTH+1,lf) ]
+        sf.append( sum(ll)/len(ll) )
+    return(sf)
     
 
-def smooth_old(f, sm=20, c=3.0):
-    lf=len(f)
-    if lf<4:
-        return f
-    g=f[:]
-    for i in range(sm):
-        g = [ (2*g[0]+ (c-2)*g[1])/c ] + [ (g[t-1] + (c-2)*g[t] + g[t+1])/c for t in range(1,lf-1) ] + [( 2*g[lf-1]+(c-2)*g[lf-2])/c ]
-    return g
-
-
 def smooth2(data, sm=50, c=3.0):
-
+    l=data.shape[2]
     data2 = data.copy()
-    #data2 = my_map( lambda x:np.log(1.0+x), data )
     data3 = data.copy()
-    for t in range(0,ld):
-        data2[:,:,t,:] = np.mean( [ data3[:,:,k,:]  for k  in range( max(0,t-3), min(t+4,ld)) ] )
-    #data2 = my_map( lambda x:np.exp(x)-1.0, data2 )
-            
-    return(data2)
-
-
-def smooth2_old(data, sm=50, c=3.0):
-
-    data2 = my_map( lambda x:np.log(1.0+x), data )
-    for i in range(sm):
-        data3 = data2.copy()
-        for t in range(1,ld-1):
-            data2[:,:,t,:] = ( data3[:,:,t-1,:] + (c-2)*data3[:,:,t,:] + data3[:,:,t+1,:] ) /c
-    data2 = my_map( lambda x:np.exp(x)-1.0, data2 )
-            
+    for t in range(1,l):
+        ll = [ data3[:,:,k,:]  for k  in range( max(0,t-SMOOTH), min(t+SMOOTH+1,l)) ]
+        data2[:,:,t,:] = sum(ll)/len(ll)
     return(data2)
 
 
 def diff(data):
-
+    
     return ( data[:,:,1:ld,: ] - data[:,:,0:ld-1,:] )
 
 
@@ -742,8 +724,8 @@ def cartes():
     zmax['mortalite']=30
     zmin['deces']=0
     zmax['incid'] = 600
-    zmin['var_incid'] = -80
-    zmax['var_incid'] = 80
+    zmin['var_incid'] = -100
+    zmax['var_incid'] = 100
     zmin['var_posit'] = -10
     zmax['var_posit'] = 10
     zmax['tension'] = 100
@@ -889,7 +871,7 @@ s_data = smooth2(data)
 # différentiation
 
 d_data = diff(data)
-d_s_data = diff(s_data)
+d_s_data = smooth2(d_data)# diff(s_data)
 
 
 def genere_page():
@@ -926,6 +908,7 @@ def genere_page():
             fic_md.write("- "+r+" : *[total](#"+clean_string(r)+"), [par département](#"+clean_string(r)+"_detail)*\n")
         else:
             fic_md.write("- "+r+" : *[total](#"+clean_string(r)+")*\n")
+        
     fic_md.write("\n")
 
     for r in REGIONS:
@@ -939,21 +922,26 @@ def genere_page():
             fic_md.write("<a name=\""+clean_string(r)+"_detail\">\n[![](./fig/"+clean_string(r)+".png)](./fig/"+clean_string(r)+".pdf) <br>\n")
             plot( r, False, "Région "+r+" (par départements)")
             fic_md.write("\n Par département de la région "+r+"\n\n")
-            for d in ds:
-                fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
+#            for d in ds:
+#                fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
             fic_md.write("\n")
             fic_md.write("[Retour au sommaire](#top)\n")
 
+        
+            
+            
     print("DEPARTEMENTS")
     fic_md.write("\n- - - -\n\n### Départements  <a name=\"par_departements\"> ([Retour au sommaire](#top))\n\n")
     for d in range(len(deps)):
         fic_md.write("- ["+deps[d]+": "+DEPARTEMENTS[deps[d]]+"](#"+deps[d]+")\n")
+        
     fic_md.write("\n") 
     for d in range(len(deps)):
         print(deps[d])
         fic_md.write("\n - - - -\n<a name=\""+deps[d]+"\"> [![](./fig/"+deps[d]+"_total.png)](./fig/"+deps[d]+"_total.pdf) <br>\n [Retour au sommaire](#top)\n\n")
         plot( deps[d], True, DEPARTEMENTS[deps[d]]+" ("+deps[d]+")" )
-
+        
+        
     fic_md.write("\n- - - -\n\n- - - -\n\n### France par départements (cartes)<a name=\"france_cartes\">\n")    
     fic_md.write("\n - - - -\n#### Hospitalisations, patients en réanimation et décès à l'hôpital\n")
     fic_md.write("[![](./fig/carte_cumul_hosp.gif)](./fig/carte_cumul_hosp.pdf)<a name=\"cumul_hosp\"><br>\n")
