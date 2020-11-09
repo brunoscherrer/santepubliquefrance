@@ -1,7 +1,8 @@
 <!doctype html><html lang="fr"><head><meta charset="UTF-8">
 
 **Des représentations graphiques de l'évolution mondiale sont disponibles [ici](http://www.iecl.univ-lorraine.fr/~Bruno.Scherrer/git/conarvirus/).**
-
+<br>**Pages similaires:**>
+le [site de Germain Forestier](https://germain-forestier.info/covid/regions-full.html), le [site de Guillaume Rozier](https://covidtracker.fr/)
 ## Evolution des données hospitalières en France concernant le Covid-19 <a name="top"> 
 
 L'organisme [*Santé Publique France*](https://www.santepubliquefrance.fr/maladies-et-traumatismes/maladies-et-infections-respiratoires/infection-a-coronavirus/articles/infection-au-nouveau-coronavirus-sars-cov-2-covid-19-france-et-monde#block-242818) diffuse des [données hospitalières](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/) et des [données sur les tests virologiques](https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/).
@@ -33,9 +34,7 @@ Ces informations sont représentées dans cette page sous forme de
 	- [taux de positivité](#posit).
 
 *Tous les graphiques sont accessibles sous forme de fichier pdf (en cliquant sur les images). Cette page est générée automatiquement par un [script python accessible sur github](https://github.com/brunoscherrer/santepubliquefrance).* 
- <br>
-Une [page similaire](https://germain-forestier.info/covid/regions-full.html) a été réalisée par un collègue universitaire, Germain Forestier.
-
+ 
 - - - -
 
  **<ins>Avertissement</ins>: Les graphiques de cette page ne concernent que les personnes qui ont été hospitalisées; en particulier, cela ne concerne pas celles qui sont décédées à cause du Covid-19 sans être passées par l'hôpital (en noir et grisé ci-dessous).**
