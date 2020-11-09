@@ -922,8 +922,8 @@ def genere_page():
             fic_md.write("<a name=\""+clean_string(r)+"_detail\">\n[![](./fig/"+clean_string(r)+".png)](./fig/"+clean_string(r)+".pdf) <br>\n")
             plot( r, False, "Région "+r+" (par départements)")
             fic_md.write("\n Par département de la région "+r+"\n\n")
-#            for d in ds:
-#                fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
+            for d in ds:
+                fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
             fic_md.write("\n")
             fic_md.write("[Retour au sommaire](#top)\n")
 
