@@ -7,7 +7,7 @@ le [site de Germain Forestier](https://germain-forestier.info/covid/regions-full
 
 L'organisme [*Santé Publique France*](https://www.santepubliquefrance.fr/maladies-et-traumatismes/maladies-et-infections-respiratoires/infection-a-coronavirus/articles/infection-au-nouveau-coronavirus-sars-cov-2-covid-19-france-et-monde#block-242818) diffuse des [données hospitalières](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/) et des [données sur les tests virologiques](https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/).
 
- Entre le 2020-03-18 et le 2020-11-08, on dispose 
+ Entre le 2020-03-18 et le 2020-11-09, on dispose 
 
 - du nombre *quotidien* de personnes hospitalisées (dont le nombre de personnes en réanimation);
 - du nombre *cumulé* des retours à domicile;
@@ -15,7 +15,7 @@ L'organisme [*Santé Publique France*](https://www.santepubliquefrance.fr/maladi
 
 La somme de ces nombres correspond au nombre total de personnes passées par l'hôpital (et sa variation correspond chaque jour aux nouvelles admissions).
 
-Entre le 2020-05-13 et le 2020-11-05, on dispose du nombre de tests et de cas positifs, ce qui permet d'estimer le taux d'incidence hebdomadaire (nombre de cas sur 7 jours glissants pour 100.000 habitants) ainsi que le taux de positivité.
+Entre le 2020-05-13 et le 2020-11-06, on dispose du nombre de tests et de cas positifs, ce qui permet d'estimer le taux d'incidence hebdomadaire (nombre de cas sur 7 jours glissants pour 100.000 habitants) ainsi que le taux de positivité.
 
 Ces informations sont représentées dans cette page sous forme de
 
@@ -91,6 +91,18 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Auvergne-Rhône-Alpes
 
+- [01: Ain](#01)
+- [03: Allier](#03)
+- [07: Ardèche](#07)
+- [15: Cantal](#15)
+- [26: Drôme](#26)
+- [38: Isère](#38)
+- [42: Loire](#42)
+- [43: Haute-Loire](#43)
+- [63: Puy-de-Dôme](#63)
+- [69: Rhône](#69)
+- [73: Savoie](#73)
+- [74: Haute-Savoie](#74)
 
 [Retour au sommaire](#top)
 
@@ -106,6 +118,14 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Bourgogne-Franche-Comté
 
+- [21: Côte-d'Or](#21)
+- [25: Doubs](#25)
+- [39: Jura](#39)
+- [58: Nièvre](#58)
+- [70: Haute-Saône](#70)
+- [71: Saône-et-Loire](#71)
+- [89: Yonne](#89)
+- [90: Territoire de Belfort](#90)
 
 [Retour au sommaire](#top)
 
@@ -121,6 +141,10 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Bretagne
 
+- [35: Ille-et-Vilaine](#35)
+- [22: Côtes-d'Armor](#22)
+- [56: Morbihan](#56)
+- [29: Finistère](#29)
 
 [Retour au sommaire](#top)
 
@@ -136,6 +160,12 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Centre-Val de Loire
 
+- [18: Cher](#18)
+- [28: Eure-et-Loir](#28)
+- [36: Indre](#36)
+- [37: Indre-et-Loire](#37)
+- [41: Loir-et-Cher](#41)
+- [45: Loiret](#45)
 
 [Retour au sommaire](#top)
 
@@ -151,6 +181,8 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Corse
 
+- [2A: Corse-du-Sud](#2A)
+- [2B: Haute-Corse](#2B)
 
 [Retour au sommaire](#top)
 
@@ -166,6 +198,16 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Grand Est
 
+- [08: Ardennes](#08)
+- [10: Aube](#10)
+- [51: Marne](#51)
+- [52: Haute-Marne](#52)
+- [54: Meurthe-et-Moselle](#54)
+- [55: Meuse](#55)
+- [57: Moselle](#57)
+- [67: Bas-Rhin](#67)
+- [68: Haut-Rhin](#68)
+- [88: Vosges](#88)
 
 [Retour au sommaire](#top)
 
@@ -197,6 +239,11 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Hauts-de-France
 
+- [02: Aisne](#02)
+- [59: Nord](#59)
+- [60: Oise](#60)
+- [62: Pas-de-Calais](#62)
+- [80: Somme](#80)
 
 [Retour au sommaire](#top)
 
@@ -212,6 +259,14 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Île-de-France
 
+- [75: Paris](#75)
+- [77: Seine-et-Marne](#77)
+- [78: Yvelines](#78)
+- [91: Essonne](#91)
+- [92: Hauts-de-Seine](#92)
+- [93: Seine-Saint-Denis](#93)
+- [94: Val-de-Marne](#94)
+- [95: Val-d'Oise](#95)
 
 [Retour au sommaire](#top)
 
@@ -251,6 +306,11 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Normandie
 
+- [14: Calvados](#14)
+- [27: Eure](#27)
+- [50: Manche](#50)
+- [61: Orne](#61)
+- [76: Seine-Maritime](#76)
 
 [Retour au sommaire](#top)
 
@@ -266,6 +326,18 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Nouvelle-Aquitaine
 
+- [16: Charente](#16)
+- [17: Charente-Maritime](#17)
+- [19: Corrèze](#19)
+- [23: Creuse](#23)
+- [24: Dordogne](#24)
+- [33: Gironde](#33)
+- [40: Landes](#40)
+- [47: Lot-et-Garonne](#47)
+- [64: Pyrénées-Atlantiques](#64)
+- [79: Deux-Sèvres](#79)
+- [86: Vienne](#86)
+- [87: Haute-Vienne](#87)
 
 [Retour au sommaire](#top)
 
@@ -281,6 +353,19 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Occitanie
 
+- [09: Ariège](#09)
+- [11: Aude](#11)
+- [12: Aveyron](#12)
+- [30: Gard](#30)
+- [31: Haute-Garonne](#31)
+- [32: Gers](#32)
+- [34: Hérault](#34)
+- [46: Lot](#46)
+- [48: Lozère](#48)
+- [65: Hautes-Pyrénées](#65)
+- [66: Pyrénées-Orientales](#66)
+- [81: Tarn](#81)
+- [82: Tarn-et-Garonne](#82)
 
 [Retour au sommaire](#top)
 
@@ -296,6 +381,11 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Pays de la Loire
 
+- [44: Loire-Atlantique](#44)
+- [49: Maine-et-Loire](#49)
+- [53: Mayenne](#53)
+- [72: Sarthe](#72)
+- [85: Vendée](#85)
 
 [Retour au sommaire](#top)
 
@@ -311,6 +401,12 @@ Ces informations sont représentées dans cette page sous forme de
 
  Par département de la région Provence-Alpes-Côte d'Azur
 
+- [04: Alpes-de-Haute-Provence](#04)
+- [05: Hautes-Alpes](#05)
+- [06: Alpes-Maritimes](#06)
+- [13: Bouches-du-Rhône](#13)
+- [83: Var](#83)
+- [84: Vaucluse](#84)
 
 [Retour au sommaire](#top)
 
