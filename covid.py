@@ -584,7 +584,7 @@ def smooth(f, sm=20, c=3.0):
     lf=len(f)
     sf=[]
     for t in range(lf):
-        ll=f[ max(0,t-SMOOTH): min(t+SMOOTH+1,lf) ]
+        ll=f[ max(0,t-SMOOTH):t+1 ]
         sf.append( sum(ll)/len(ll) )
     return(sf)
     
@@ -594,7 +594,7 @@ def smooth2(data, sm=50, c=3.0):
     data2 = data.copy()
     data3 = data.copy()
     for t in range(1,l):
-        ll = [ data3[:,:,k,:]  for k  in range( max(0,t-SMOOTH), min(t+SMOOTH+1,l)) ]
+        ll = [ data3[:,:,k,:]  for k  in range( max(0,t-SMOOTH),t+1 ) ]
         data2[:,:,t,:] = sum(ll)/len(ll)
     return(data2)
 
@@ -878,7 +878,7 @@ def genere_page():
 
     fic_md = open(r"README.md","w")
 
-    fic_md.write("<!doctype html><html lang=\"fr\"><head><meta charset=\"UTF-8\">\n\n**Des représentations graphiques de l'évolution mondiale sont disponibles [ici](http://www.iecl.univ-lorraine.fr/~Bruno.Scherrer/git/conarvirus/).**\n<br>**Pages similaires:**>\nle [site de Germain Forestier](https://germain-forestier.info/covid/regions-full.html), le [site de Guillaume Rozier](https://covidtracker.fr/)\n")
+    fic_md.write("<!doctype html><html lang=\"fr\"><head><meta charset=\"UTF-8\">\n\n**Des représentations graphiques de l'évolution mondiale sont disponibles [ici](http://www.iecl.univ-lorraine.fr/~Bruno.Scherrer/git/conarvirus/).**\n<br>**Pages similaires:**\nle [site de Germain Forestier](https://germain-forestier.info/covid/regions-full.html), le [site de Guillaume Rozier](https://covidtracker.fr/)\n")
 
     fic_md.write("## Evolution des données hospitalières en France concernant le Covid-19 <a name=\"top\"> \n\n")
 
