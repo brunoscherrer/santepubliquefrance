@@ -43,7 +43,7 @@ def get_data_from_files():
         for row in csv_reader:
             if line_count != 0:
                 [dp, g, d] = row[0:3]
-                if g!="0" and dp!="":
+                if g!="0" and dp not in ["","NA"]:
                     d=fix_date(d)
                     add_key(deps, dp)
                     add_key(genres, g)
@@ -64,16 +64,16 @@ def get_data_from_files():
         
     data = np.zeros( (len(deps), len(genres), len(dates), 4) )
    
-    with open(file) as csv_file:
+    with open(file) as csv_file:  
         csv_reader = csv.reader(csv_file, delimiter=';')
         line_count = 0
         for row in csv_reader:
             if line_count != 0:
                 [dp, g, d] = row[0:3]
-                if g!="0" and dp!="":
+                if g!="0" and dp not in ["","NA"]:
                     d=fix_date(d)
                     r = list(map(int, row[3:]))
-                    data[ deps.index(dp), genres.index(g), dates.index(d) ] = [ r[0], r[1], r[2], r[3] ]
+                    data[ deps.index(dp), genres.index(g), dates.index(d) ] = [ r[0], r[1], r[3], r[2] ]
             line_count+=1
 
     # fix erreur fichier santepubliquefrance
@@ -900,65 +900,68 @@ def genere_page():
     fic_md.write("[![](./fig/France.png)](./fig/France.pdf)<br>\n")
     plot( "France", True, "France entière (total)" )
     plot( "France", False, "France entière (par régions)" )
+
+    if True:
     
-    print("REGIONS")
-    fic_md.write("\n- - - -\n### Régions <a name=\"par_regions\"> ([Retour au sommaire](#top))\n\n")
-    for r in REGIONS:
-        if len(REGIONS[r])>1:
-            fic_md.write("- "+r+" : *[total](#"+clean_string(r)+"), [par département](#"+clean_string(r)+"_detail)*\n")
-        else:
-            fic_md.write("- "+r+" : *[total](#"+clean_string(r)+")*\n")
-        
-    fic_md.write("\n")
+        print("REGIONS")
+        fic_md.write("\n- - - -\n### Régions <a name=\"par_regions\"> ([Retour au sommaire](#top))\n\n")
+        for r in REGIONS:
+            if len(REGIONS[r])>1:
+                fic_md.write("- "+r+" : *[total](#"+clean_string(r)+"), [par département](#"+clean_string(r)+"_detail)*\n")
+            else:
+                fic_md.write("- "+r+" : *[total](#"+clean_string(r)+")*\n")
 
-    for r in REGIONS:
-        print(r)
-        fic_md.write("\n - - - -\n\n<a name=\""+clean_string(r)+"\"> \n")
-        fic_md.write("[![](./fig/"+clean_string(r)+"_total.png)](./fig/"+clean_string(r)+"_total.pdf) <br>\n")
-        plot( r, True, "Région "+r+" (total)")
-        fic_md.write("\n[Retour au sommaire](#top)\n\n")
-        ds = REGIONS[r]
-        if len(ds)>1:
-            fic_md.write("<a name=\""+clean_string(r)+"_detail\">\n[![](./fig/"+clean_string(r)+".png)](./fig/"+clean_string(r)+".pdf) <br>\n")
-            plot( r, False, "Région "+r+" (par départements)")
-            fic_md.write("\n Par département de la région "+r+"\n\n")
-            for d in ds:
-                fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
-            fic_md.write("\n")
-            fic_md.write("[Retour au sommaire](#top)\n")
+        fic_md.write("\n")
 
-        
-            
-            
-    print("DEPARTEMENTS")
-    fic_md.write("\n- - - -\n\n### Départements  <a name=\"par_departements\"> ([Retour au sommaire](#top))\n\n")
-    for d in range(len(deps)):
-        fic_md.write("- ["+deps[d]+": "+DEPARTEMENTS[deps[d]]+"](#"+deps[d]+")\n")
-        
-    fic_md.write("\n") 
-    for d in range(len(deps)):
-        print(deps[d])
-        fic_md.write("\n - - - -\n<a name=\""+deps[d]+"\"> [![](./fig/"+deps[d]+"_total.png)](./fig/"+deps[d]+"_total.pdf) <br>\n [Retour au sommaire](#top)\n\n")
-        plot( deps[d], True, DEPARTEMENTS[deps[d]]+" ("+deps[d]+")" )
-        
-        
-    fic_md.write("\n- - - -\n\n- - - -\n\n### France par départements (cartes)<a name=\"france_cartes\">\n")    
-    fic_md.write("\n - - - -\n#### Hospitalisations, patients en réanimation et décès à l'hôpital\n")
-    fic_md.write("[![](./fig/carte_cumul_hosp.gif)](./fig/carte_cumul_hosp.pdf)<a name=\"cumul_hosp\"><br>\n")
-    fic_md.write("[![](./fig/carte_cumul_deces.gif)](./fig/carte_cumul_deces.pdf)<a name=\"cumul_deces\"><br>\n")
-    fic_md.write("[![](./fig/carte_hosp.gif)](./fig/carte_hosp.pdf)<a name=\"hosp\"><br>\n")
-    fic_md.write("[![](./fig/carte_rea.gif)](./fig/carte_rea.pdf)<a name=\"rea\"><br>\n")
-    fic_md.write("\n - - - -\n#### Nombre de lits de réanimation (source [DREES 2018](https://drees.solidarites-sante.gouv.fr/etudes-et-statistiques/publications/article/nombre-de-lits-de-reanimation-de-soins-intensifs-et-de-soins-continus-en-france)) et tension en réanimation<a name=\"lits\">\n")
-    fic_md.write("[![](./fig/carte_lits_rea.png)](./fig/carte_lits_rea.pdf)")
-    fic_md.write("[![](./fig/carte_tension.gif)](./fig/carte_tension.pdf)")
-    fic_md.write("[![](./fig/carte_tension_moy.png)](./fig/carte_tension_moy.pdf)<br>\n")
-    fic_md.write("\n - - - -\n#### Mortalité en sortie de l'hôpital, relation avec la tension en réanimation<a name=\"mortalite\">\n")
-    fic_md.write("[![](./fig/carte_mortalite.png)](./fig/carte_mortalite.pdf)")
-    fic_md.write("[![](./fig/tension_mort.png)](./fig/tension_mort.pdf)<br>\n")
-    fic_md.write("\n- - - -\n\n#### Taux d'incidence par départements (nombre de cas sur 7 jours glissants pour 100.000 habitants)<a name=\"incid\">\n")
-    fic_md.write("[![](./fig/carte_incid.gif)](./fig/carte_incid.pdf)<br>\n")
-    fic_md.write("#### Taux de positivité <a name=\"posit\">\n")
-    fic_md.write("[![](./fig/carte_posit.gif)](./fig/carte_posit.pdf)<br>\n")
+        for r in REGIONS:
+            print(r)
+            fic_md.write("\n - - - -\n\n<a name=\""+clean_string(r)+"\"> \n")
+            fic_md.write("[![](./fig/"+clean_string(r)+"_total.png)](./fig/"+clean_string(r)+"_total.pdf) <br>\n")
+            plot( r, True, "Région "+r+" (total)")
+            fic_md.write("\n[Retour au sommaire](#top)\n\n")
+            ds = REGIONS[r]
+            if len(ds)>1:
+                fic_md.write("<a name=\""+clean_string(r)+"_detail\">\n[![](./fig/"+clean_string(r)+".png)](./fig/"+clean_string(r)+".pdf) <br>\n")
+                plot( r, False, "Région "+r+" (par départements)")
+                fic_md.write("\n Par département de la région "+r+"\n\n")
+                for d in ds:
+                    fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
+                fic_md.write("\n")
+                fic_md.write("[Retour au sommaire](#top)\n")
+
+
+
+
+        print("DEPARTEMENTS")
+        fic_md.write("\n- - - -\n\n### Départements  <a name=\"par_departements\"> ([Retour au sommaire](#top))\n\n")
+        for d in range(len(deps)):
+            fic_md.write("- ["+deps[d]+": "+DEPARTEMENTS[deps[d]]+"](#"+deps[d]+")\n")
+
+        fic_md.write("\n") 
+        for d in range(len(deps)):
+            print(deps[d])
+            fic_md.write("\n - - - -\n<a name=\""+deps[d]+"\"> [![](./fig/"+deps[d]+"_total.png)](./fig/"+deps[d]+"_total.pdf) <br>\n [Retour au sommaire](#top)\n\n")
+            plot( deps[d], True, DEPARTEMENTS[deps[d]]+" ("+deps[d]+")" )
+
+
+        fic_md.write("\n- - - -\n\n- - - -\n\n### France par départements (cartes)<a name=\"france_cartes\">\n")    
+        fic_md.write("\n - - - -\n#### Hospitalisations, patients en réanimation et décès à l'hôpital\n")
+        fic_md.write("[![](./fig/carte_cumul_hosp.gif)](./fig/carte_cumul_hosp.pdf)<a name=\"cumul_hosp\"><br>\n")
+        fic_md.write("[![](./fig/carte_cumul_deces.gif)](./fig/carte_cumul_deces.pdf)<a name=\"cumul_deces\"><br>\n")
+        fic_md.write("[![](./fig/carte_hosp.gif)](./fig/carte_hosp.pdf)<a name=\"hosp\"><br>\n")
+        fic_md.write("[![](./fig/carte_rea.gif)](./fig/carte_rea.pdf)<a name=\"rea\"><br>\n")
+        fic_md.write("\n - - - -\n#### Nombre de lits de réanimation (source [DREES 2018](https://drees.solidarites-sante.gouv.fr/etudes-et-statistiques/publications/article/nombre-de-lits-de-reanimation-de-soins-intensifs-et-de-soins-continus-en-france)) et tension en réanimation<a name=\"lits\">\n")
+        fic_md.write("[![](./fig/carte_lits_rea.png)](./fig/carte_lits_rea.pdf)")
+        fic_md.write("[![](./fig/carte_tension.gif)](./fig/carte_tension.pdf)")
+        fic_md.write("[![](./fig/carte_tension_moy.png)](./fig/carte_tension_moy.pdf)<br>\n")
+        fic_md.write("\n - - - -\n#### Mortalité en sortie de l'hôpital, relation avec la tension en réanimation<a name=\"mortalite\">\n")
+        fic_md.write("[![](./fig/carte_mortalite.png)](./fig/carte_mortalite.pdf)")
+        fic_md.write("[![](./fig/tension_mort.png)](./fig/tension_mort.pdf)<br>\n")
+        fic_md.write("\n- - - -\n\n#### Taux d'incidence par départements (nombre de cas sur 7 jours glissants pour 100.000 habitants)<a name=\"incid\">\n")
+        fic_md.write("[![](./fig/carte_incid.gif)](./fig/carte_incid.pdf)<br>\n")
+        fic_md.write("#### Taux de positivité <a name=\"posit\">\n")
+        fic_md.write("[![](./fig/carte_posit.gif)](./fig/carte_posit.pdf)<br>\n")
+
     fic_md.close()
 
     os.system("markdown README.md > README.html")

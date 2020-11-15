@@ -1,7 +1,0 @@
-#!/usr/bin/python3
-
-from covid import *
-
-analyse_donnees()
-
-cartes()
