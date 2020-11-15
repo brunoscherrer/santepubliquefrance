@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset="UTF-8">
+<html lang="fr"><head><meta charset="UTF-8">
 
 **Des représentations graphiques de l'évolution mondiale sont disponibles [ici](http://www.iecl.univ-lorraine.fr/~Bruno.Scherrer/git/conarvirus/).**
 <br>**Pages similaires:**
@@ -1049,3 +1049,4 @@ Ces informations sont représentées dans cette page sous forme de
 [![](./fig/carte_incid.gif)](./fig/carte_incid.pdf)<br>
 #### Taux de positivité <a name="posit">
 [![](./fig/carte_posit.gif)](./fig/carte_posit.pdf)<br>
+</html>
