@@ -73,7 +73,7 @@ def get_data_from_files():
                 if g!="0" and dp not in ["","NA"]:
                     d=fix_date(d)
                     r = list(map(int, row[3:]))
-                    data[ deps.index(dp), genres.index(g), dates.index(d) ] = [ r[0], r[1], r[3], r[2] ]
+                    data[ deps.index(dp), genres.index(g), dates.index(d) ] = [ r[0], r[1], r[2], r[3] ]
             line_count+=1
 
     # fix erreur fichier santepubliquefrance
