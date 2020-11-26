@@ -724,8 +724,8 @@ def cartes():
     zmax['mortalite']=30
     zmin['deces']=0
     zmax['incid'] = 600
-    zmin['var_incid'] = -100
-    zmax['var_incid'] = 100
+    zmin['var_incid'] = -150
+    zmax['var_incid'] = 150
     zmin['var_posit'] = -10
     zmax['var_posit'] = 10
     zmax['tension'] = 100
@@ -839,8 +839,9 @@ def tension_mort():
             x,y = np.mean(t),m[time-1]#np.mean(t), m[time-1]
             lx.append(x)
             ly.append(y)
-            intensity = min(1, np.sum( c[time-1,:] )/pop[ind]*250)
-            plt.text(x, y, d, color=cmap(intensity), **txtargs, zorder=int(100*intensity))
+            intensity = min(0.9, np.sum( c[time-1,:] )/pop[ind]*250)
+            if intensity>.0:
+                plt.text(x, y, d, color=cmap(intensity), **txtargs, zorder=int(100*intensity))
             #plt.plot( smooth(list(t)), smooth(list(m)), "-", alpha=0.2)
         plt.xlabel("Taux (%) d'occupation des lits de réa (moyenne depuis le 17/3)")
         plt.ylabel("Part (%) des décès parmi les sorties de l'hôpital ("+dates[time-1]+") ")
