@@ -193,7 +193,7 @@ def plot( endroit, total, titre, size=5 ):
 
     nc=0
     for x in zones:
-        c = np.sum( sum( [ data[ deps.index(d),:,:,2 ] for d in zones[x] ] ), axis=0 )
+        c = np.sum( sum( [ data[ deps.index(d),:,:,3 ] for d in zones[x] ] ), axis=0 )
         args = { "facecolor":coul[nc] }  
         b = a - c
         plt.plot(xr, b, "-", color=coul[nc], alpha=0.1)
@@ -204,7 +204,7 @@ def plot( endroit, total, titre, size=5 ):
 
     nc=0
     for x in zones:
-        c = np.sum( sum( [ data[ deps.index(d),:,:,3 ] for d in zones[x] ] ), axis=0 )
+        c = np.sum( sum( [ data[ deps.index(d),:,:,2 ] for d in zones[x] ] ), axis=0 )
         args = { "facecolor":coul[nc] }
         b = a - c
         plt.plot(xr, b, "-", color=coul[nc], alpha=0.1)
@@ -235,9 +235,9 @@ def plot( endroit, total, titre, size=5 ):
         plt.text(xr[-1], (c[1])/2., "en réanimation",  **args)
         mortalite = (c[3]/(c[2]+c[3]))*100
         plt.text(xr[0],-c[2]-c[3], "Mortalité (en sortie): %.1f%%"%(mortalite), color='black', ha='left', va='bottom', bbox=dict(boxstyle="round", ec=(1., 0.5, 0.5), fc=(1., 0.8, 0.8)) )
-    plt.text(xr[-1], -c[2]/2., "Retours à domicile", **args)
+    plt.text(xr[-1], -c[3]-c[2]/2., "Retours à domicile", **args)
     if c[3]>0:
-        plt.text(xr[-1], -c[2]-c[3]/2., "Décès", **args)
+        plt.text(xr[-1], -c[3]/2., "Décès", **args)
 
     if len(zones)>1:
         plt.legend(loc='upper left', fontsize=7)
