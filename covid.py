@@ -121,7 +121,7 @@ def get_data_from_files():
         line_count = 0
         for row in csv_reader:
             if line_count != 0:
-                dp, d, p, t, cat = row
+                dp, d, p, t, cat = row[0:5]
                 if cat=="0" and dp not in ['975','977','978']:
                     tests[ deps.index(dp), dates.index(d) ] = [ int(t), int(p) ]
             line_count+=1
