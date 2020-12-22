@@ -338,76 +338,8 @@ def plot( endroit, total, titre, size=5 ):
     
 
     # graphe 4
-    
+            
     ax = plt.subplot(geomx,geomy,4)
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
-        
-    plt.title("Nombre de tests quotidiens pour 100.000 habitants")
-        
-    nc = 0
-    mx = 0
-    for x in zones:
-        popx = sum( [ pop[deps.index(d)] for d in zones[x] ] )/100000.0
-        c = sum( [ tests[ deps.index(d),:,0 ] for d in zones[x] ] )
-        c = c/popx # normalisaiton par la population
-        c = c[56:-3]
-        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
-        xr = xr[56:-3]
-        cs = smooth(c)
-        if len(zones)>1:
-            args = { "color":coul[nc] }
-        else:
-            args = { "color":'black' }
-        plt.plot(xr,c, "o", markersize=2, **args)
-        plt.plot(xr,cs, "-", **args, label=x, lw=1)
-        nc+=1
-    plt.grid(True, which="both")
-    if len(zones)>1:
-        plt.legend(loc="upper left", fontsize=7)
-
-    # graphe 5
-    
-    ax = plt.subplot(geomx,geomy,5)
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
-    if len(zones)>1:
-        plt.title("Taux d'incidence hebdomadaire pour 100.000 habitants")
-    else:
-        plt.title("$7\\times$nombre de cas positifs et taux d'incidence hebdo pour 100.000 habitants")
-        
-    nc = 0
-    mx = 0
-    for x in zones:
-        popx = sum( [ pop[deps.index(d)] for d in zones[x] ] )/100000.0
-        c = sum( [ tests[ deps.index(d),:,1 ] for d in zones[x] ] )
-        c = c/popx # normalisaiton par la population
-        c = c[56:-3]
-        cs = smooth(c)
-        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
-        xr = xr[56:-3]
-        xr2 = xr[6:]
-        c2 = [ np.sum( c[t-6:t+1] ) for t in range(6,len(c)) ]  # sum sur les 7 derniers jours (correction bord gauche)
-        c2s = smooth(c2)
-        if len(zones)>1:
-            args = { "color":coul[nc] }
-        else:
-            args = { "color":'black' }
-        plt.plot(xr2,c2, "o", markersize=2, **args)
-        if len(zones)>1:
-            plt.plot(xr2,c2s, "-", **args, label=x, lw=1)
-        else:
-            plt.plot(xr2,c2s, "-", **args, label="Taux d'incidence (J-6 $\\rightarrow$ J)", lw=1)
-            plt.plot(xr,7*np.array(c), "o", markersize=2, **args, alpha=0.5)
-            plt.plot(xr,7*np.array(cs), "--", **args, label="$7\\times$nombre de cas", lw=1, alpha=0.5)
-        nc+=1
-    plt.grid(True, which="both")
-    #if len(zones)>1:
-    #    plt.ylim(0,50)
-    plt.legend(loc="upper left", fontsize=7)
-    
-        
-    # graphe 6
-    
-    ax = plt.subplot(geomx,geomy,6)
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
         
     plt.title("Taux (%) de positivité")
@@ -435,6 +367,78 @@ def plot( endroit, total, titre, size=5 ):
             plt.legend(loc="upper left", fontsize=7)
         ymax=max(max(cs),ymax)
     plt.ylim(0,ymax*1.05)
+
+    
+    # graphe 5
+    
+    ax = plt.subplot(geomx,geomy,5)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
+    if len(zones)>1:
+        plt.title("Taux d'incidence hebdomadaire pour 100.000 habitants")
+    else:
+        plt.title("$7\\times$nombre de cas positifs et taux d'incidence hebdo pour 100.000 habitants")
+        
+    nc = 0
+    mx = 0
+    for x in zones:
+        popx = sum( [ pop[deps.index(d)] for d in zones[x] ] )/100000.0
+        c = sum( [ tests[ deps.index(d),:,1 ] for d in zones[x] ] )
+        c = c/popx # normalisaiton par la population
+        c = c[56:-3]
+        cs = smooth(c)
+        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+        xr = xr[56:-3]
+        xr2 = xr[6:]
+        c2 = [ np.sum( c[t-6:t+1] ) for t in range(6,len(c)) ]  # sum sur les 7 derniers jours (correction bord gauche)
+        #c2s = smooth(c2)
+        if len(zones)>1:
+            args = { "color":coul[nc] }
+        else:
+            args = { "color":'black' }
+        #plt.plot(xr2,c2, "o", markersize=2, **args)
+        if len(zones)>1:
+            plt.plot(xr2,c2, "-", **args, label=x, lw=1)
+        else:
+            plt.plot(xr2,c2, "-", **args, label="Taux d'incidence (J-6 $\\rightarrow$ J)", lw=1)
+            plt.plot(xr,7*np.array(c), "o", markersize=2, **args, alpha=0.5)
+            plt.plot(xr,7*np.array(cs), "--", **args, label="$7\\times$nombre de cas", lw=1, alpha=0.5)
+        nc+=1
+    plt.grid(True, which="both")
+    #if len(zones)>1:
+    #    plt.ylim(0,50)
+    plt.legend(loc="upper left", fontsize=7)
+    
+        
+    # graphe 6
+    
+    ax = plt.subplot(geomx,geomy,6)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
+    
+    plt.title("Taux d'incidence hebdomadaire pour 100.000 habitants (log)")
+            
+    nc = 0
+    mx = 0
+    for x in zones:
+        popx = sum( [ pop[deps.index(d)] for d in zones[x] ] )/100000.0
+        c = sum( [ tests[ deps.index(d),:,1 ] for d in zones[x] ] )
+        c = c/popx # normalisaiton par la population
+        c = c[56:-3]
+        cs = smooth(c)
+        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+        xr = xr[56:-3]
+        xr2 = xr[6:]
+        c2 = [ np.sum( c[t-6:t+1] ) for t in range(6,len(c)) ]  # sum sur les 7 derniers jours (correction bord gauche)
+        #c2s = smooth(c2)
+        if len(zones)>1:
+            args = { "color":coul[nc] }
+        else:
+            args = { "color":'black' }
+        #plt.plot(xr2,c2, "o", markersize=2, **args)
+        plt.plot(xr2,c2, "-", **args, label=x, lw=1)
+        nc+=1
+    plt.grid(True, which="both")
+    plt.yscale('log')
+    
     
     # finalisation des graphiques
     
