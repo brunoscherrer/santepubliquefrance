@@ -7,7 +7,7 @@ le [site de Germain Forestier](https://germain-forestier.info/covid/regions-full
 
 L'organisme [*Santé Publique France*](https://www.santepubliquefrance.fr/maladies-et-traumatismes/maladies-et-infections-respiratoires/infection-a-coronavirus/articles/infection-au-nouveau-coronavirus-sars-cov-2-covid-19-france-et-monde#block-242818) diffuse des [données hospitalières](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/) et des [données sur les tests virologiques](https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/).
 
- Entre le 2020-03-18 et le 2020-12-21, on dispose 
+ Entre le 2020-03-18 et le 2020-12-22, on dispose 
 
 - du nombre *quotidien* de personnes hospitalisées (dont le nombre de personnes en réanimation);
 - du nombre *cumulé* des retours à domicile;
@@ -15,7 +15,7 @@ L'organisme [*Santé Publique France*](https://www.santepubliquefrance.fr/maladi
 
 La somme de ces nombres correspond au nombre total de personnes passées par l'hôpital (et sa variation correspond chaque jour aux nouvelles admissions).
 
-Entre le 2020-05-13 et le 2020-12-18, on dispose du nombre de tests et de cas positifs, ce qui permet d'estimer le taux d'incidence hebdomadaire (nombre de cas sur 7 jours glissants pour 100.000 habitants) ainsi que le taux de positivité.
+Entre le 2020-05-13 et le 2020-12-19, on dispose du nombre de tests et de cas positifs, ce qui permet d'estimer le taux d'incidence hebdomadaire (nombre de cas sur 7 jours glissants pour 100.000 habitants) ainsi que le taux de positivité.
 
 Ces informations sont représentées dans cette page sous forme de
 
@@ -1006,3 +1006,47 @@ Ces informations sont représentées dans cette page sous forme de
 <a name="972"> [![](./fig/972_total.png)](./fig/972_total.pdf) <br>
  [Retour au sommaire](#top)
 
+
+ - - - -
+<a name="973"> [![](./fig/973_total.png)](./fig/973_total.pdf) <br>
+ [Retour au sommaire](#top)
+
+
+ - - - -
+<a name="974"> [![](./fig/974_total.png)](./fig/974_total.pdf) <br>
+ [Retour au sommaire](#top)
+
+
+ - - - -
+<a name="976"> [![](./fig/976_total.png)](./fig/976_total.pdf) <br>
+ [Retour au sommaire](#top)
+
+
+- - - -
+
+- - - -
+
+### France par départements (cartes)<a name="france_cartes">
+
+ - - - -
+#### Hospitalisations, patients en réanimation et décès à l'hôpital
+[![](./fig/carte_cumul_hosp.gif)](./fig/carte_cumul_hosp.pdf)<a name="cumul_hosp"><br>
+[![](./fig/carte_cumul_deces.gif)](./fig/carte_cumul_deces.pdf)<a name="cumul_deces"><br>
+[![](./fig/carte_hosp.gif)](./fig/carte_hosp.pdf)<a name="hosp"><br>
+[![](./fig/carte_rea.gif)](./fig/carte_rea.pdf)<a name="rea"><br>
+
+ - - - -
+#### Nombre de lits de réanimation (source [DREES 2018](https://drees.solidarites-sante.gouv.fr/etudes-et-statistiques/publications/article/nombre-de-lits-de-reanimation-de-soins-intensifs-et-de-soins-continus-en-france)) et tension en réanimation<a name="lits">
+[![](./fig/carte_lits_rea.png)](./fig/carte_lits_rea.pdf)[![](./fig/carte_tension.gif)](./fig/carte_tension.pdf)[![](./fig/carte_tension_moy.png)](./fig/carte_tension_moy.pdf)<br>
+
+ - - - -
+#### Mortalité en sortie de l'hôpital, relation avec la tension en réanimation<a name="mortalite">
+[![](./fig/carte_mortalite.png)](./fig/carte_mortalite.pdf)[![](./fig/tension_mort.png)](./fig/tension_mort.pdf)<br>
+
+- - - -
+
+#### Taux d'incidence par départements (nombre de cas sur 7 jours glissants pour 100.000 habitants)<a name="incid">
+[![](./fig/carte_incid.gif)](./fig/carte_incid.pdf)<br>
+#### Taux de positivité <a name="posit">
+[![](./fig/carte_posit.gif)](./fig/carte_posit.pdf)<br>
+</html>
