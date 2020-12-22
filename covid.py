@@ -363,10 +363,10 @@ def plot( endroit, total, titre, size=5 ):
         plt.plot(xr,cs, "-", **args, label=x, lw=1)
         nc+=1
         plt.grid(True, which="both")
-        if len(zones)>1:
-            plt.legend(loc="upper left", fontsize=7)
         ymax=max(max(cs),ymax)
     plt.ylim(0,ymax*1.05)
+    if len(zones)>1:
+        plt.legend(loc="upper left", fontsize=7)
 
     
     # graphe 5
@@ -438,7 +438,8 @@ def plot( endroit, total, titre, size=5 ):
         nc+=1
     plt.grid(True, which="both")
     plt.yscale('log')
-    
+    if len(zones)>1:
+        plt.legend(loc="upper left", fontsize=7)
     
     # finalisation des graphiques
     
