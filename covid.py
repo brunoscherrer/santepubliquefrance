@@ -242,6 +242,8 @@ def plot( endroit, total, titre, size=5 ):
     if len(zones)>1:
         plt.legend(loc='upper left', fontsize=7)
 
+    #    plt.yscale('symlog', linthreshy=1000)
+        
 
     # graphe 2
     
