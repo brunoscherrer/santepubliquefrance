@@ -85,7 +85,7 @@ def get_data_from_files():
             
     print("Données population")
 
-    file = "pop_dep_2020_insee.csv"
+    file = "pop_dep_2021_insee.csv"
 
     pop = np.zeros( len(deps) )
     
@@ -107,7 +107,7 @@ def get_data_from_files():
         for row in csv_reader:
             if line_count!=0:
                 r = list(map(int, row[1:]))
-                lits[ deps.index(row[0]) ] = [ r[0], r[0]+r[1]+r[2] ]
+                lits[ deps.index(row[0]) ] = [ r[0] ]
             line_count += 1
 
     print("Données tests")
