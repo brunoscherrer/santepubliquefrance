@@ -31,6 +31,7 @@ REGIONS = {
     'Occitanie': ['09', '11', '12', '30', '31', '32', '34', '46', '48', '65', '66', '81', '82'],
     'Pays de la Loire': ['44', '49', '53', '72', '85'],
     'Provence-Alpes-Côte d\'Azur': ['04', '05', '06', '13', '83', '84'],
+#    'Saint-Martin': ['978']
 }
 
 DEPARTEMENTS = {
@@ -135,6 +136,7 @@ DEPARTEMENTS = {
     '973': 'Guyane', 
     '974': 'La Réunion', 
     '976': 'Mayotte',
+#    '978': 'Saint-Martin'
 }
 
 LISTE_REGIONS =  [ x for x in REGIONS ]

@@ -43,7 +43,7 @@ def get_data_from_files():
         for row in csv_reader:
             if line_count != 0:
                 [dp, g, d] = row[0:3]
-                if g!="0" and dp not in ["","NA"]:
+                if g!="0" and dp not in ["","NA","978"]:
                     d=fix_date(d)
                     add_key(deps, dp)
                     add_key(genres, g)
@@ -70,7 +70,7 @@ def get_data_from_files():
         for row in csv_reader:
             if line_count != 0:
                 [dp, g, d] = row[0:3]
-                if g!="0" and dp not in ["","NA"]:
+                if g!="0" and dp not in ["","NA","978"]:
                     d=fix_date(d)
                     r = list(map(int, [row[3],row[4],row[8],row[9]]))
                     data[ deps.index(dp), genres.index(g), dates.index(d) ] = [ r[0], r[1], r[2], r[3] ]
@@ -906,8 +906,8 @@ def genere_page():
     fic_md.write("[![](./fig/France_total.png)](./fig/France_total.pdf)<br>\n")
     fic_md.write("\n#### France, par régions (graphiques)<a name=\"france_regions\">\n\n")
     fic_md.write("[![](./fig/France.png)](./fig/France.pdf)<br>\n")
-    plot( "France", True, "France entière (total)" )
-    plot( "France", False, "France entière (par régions)" )
+    #plot( "France", True, "France entière (total)" )
+    #plot( "France", False, "France entière (par régions)" )
     
     print("REGIONS")
     fic_md.write("\n- - - -\n### Régions <a name=\"par_regions\"> ([Retour au sommaire](#top))\n\n")
@@ -923,12 +923,12 @@ def genere_page():
         print(r)
         fic_md.write("\n - - - -\n\n<a name=\""+clean_string(r)+"\"> \n")
         fic_md.write("[![](./fig/"+clean_string(r)+"_total.png)](./fig/"+clean_string(r)+"_total.pdf) <br>\n")
-        plot( r, True, "Région "+r+" (total)")
+        #plot( r, True, "Région "+r+" (total)")
         fic_md.write("\n[Retour au sommaire](#top)\n\n")
         ds = REGIONS[r]
         if len(ds)>1:
             fic_md.write("<a name=\""+clean_string(r)+"_detail\">\n[![](./fig/"+clean_string(r)+".png)](./fig/"+clean_string(r)+".pdf) <br>\n")
-            plot( r, False, "Région "+r+" (par départements)")
+            #plot( r, False, "Région "+r+" (par départements)")
             fic_md.write("\n Par département de la région "+r+"\n\n")
             for d in ds:
                 fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
