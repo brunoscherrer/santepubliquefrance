@@ -7,7 +7,7 @@ le [site de Germain Forestier](https://germain-forestier.info/covid/), le [site 
 
 L'organisme [*Santé Publique France*](https://www.santepubliquefrance.fr/maladies-et-traumatismes/maladies-et-infections-respiratoires/infection-a-coronavirus/articles/infection-au-nouveau-coronavirus-sars-cov-2-covid-19-france-et-monde#block-242818) diffuse des [données hospitalières](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/) et des [données sur les tests virologiques](https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-resultats-des-tests-virologiques-covid-19/).
 
- Entre le 2020-03-18 et le 2021-10-18, on dispose 
+ Entre le 2020-03-18 et le 2021-10-23, on dispose 
 
 - du nombre *quotidien* de personnes hospitalisées (dont le nombre de personnes en réanimation);
 - du nombre *cumulé* des retours à domicile;
@@ -15,7 +15,7 @@ L'organisme [*Santé Publique France*](https://www.santepubliquefrance.fr/maladi
 
 La somme de ces nombres correspond au nombre total de personnes passées par l'hôpital (et sa variation correspond chaque jour aux nouvelles admissions).
 
-Entre le 2020-05-13 et le 2021-10-15, on dispose du nombre de tests et de cas positifs, ce qui permet d'estimer le taux d'incidence hebdomadaire (nombre de cas sur 7 jours glissants pour 100.000 habitants) ainsi que le taux de positivité.
+Entre le 2020-05-13 et le 2021-10-20, on dispose du nombre de tests et de cas positifs, ce qui permet d'estimer le taux d'incidence hebdomadaire (nombre de cas sur 7 jours glissants pour 100.000 habitants) ainsi que le taux de positivité.
 
 Ces informations sont représentées dans cette page sous forme de
 
