@@ -185,7 +185,7 @@ def plot( endroit, total, titre, size=5 ):
     
     plt.grid(True, which="both")
     
-    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-LD+1,1) ]
 
     plt.plot(xr, [0.0]*len(xr), "-", color="black", lw=1)
 
@@ -196,22 +196,22 @@ def plot( endroit, total, titre, size=5 ):
         c = np.sum( sum( [ data[ deps.index(d),:,:,3 ] for d in zones[x] ] ), axis=0 )
         args = { "facecolor":coul[nc] }  
         b = a - c
-        plt.plot(xr, b, "-", color=coul[nc], alpha=0.1)
-        plt.fill_between(xr, b, a, alpha=0.1, **args)
+        plt.plot(xr, b[-LD:], "-", color=coul[nc], alpha=0.1)
+        plt.fill_between(xr, b[-LD:], a[-LD:], alpha=0.1, **args)
         a=b
         nc+=1
-    plt.plot(xr, b, "--", color="black", alpha=0.5, lw=1)
+    plt.plot(xr, b[-LD:], "--", color="black", alpha=0.5, lw=1)
 
     nc=0
     for x in zones:
         c = np.sum( sum( [ data[ deps.index(d),:,:,2 ] for d in zones[x] ] ), axis=0 )
         args = { "facecolor":coul[nc] }
         b = a - c
-        plt.plot(xr, b, "-", color=coul[nc], alpha=0.1)
-        plt.fill_between(xr, b, a, alpha=0.1, **args)
+        plt.plot(xr, b[-LD:], "-", color=coul[nc], alpha=0.1)
+        plt.fill_between(xr, b[-LD:], a[-LD:], alpha=0.1, **args)
         a=b
         nc+=1
-    plt.plot(xr, b, "--", color="black", alpha=0.5, lw=1)
+    plt.plot(xr, b[-LD:], "--", color="black", alpha=0.5, lw=1)
         
     a = np.zeros(ld)
     nc=0
@@ -220,12 +220,12 @@ def plot( endroit, total, titre, size=5 ):
         args = { "facecolor":coul[nc] }
         b = a + c[:,0]
         if len(zones)==1:
-            plt.plot(xr, a+c[:,1], ":", color=coul[nc], alpha=0.7)
-        plt.plot(xr, b, "-", color=coul[nc], alpha=0.5)
-        plt.fill_between(xr, a, b, alpha=0.4, **args, label=x)
+            plt.plot(xr, (a+c[:,1])[-LD:], ":", color=coul[nc], alpha=0.7)
+        plt.plot(xr, b[-LD:], "-", color=coul[nc], alpha=0.5)
+        plt.fill_between(xr, a[-LD:], b[-LD:], alpha=0.4, **args, label=x)
         a=b
         nc+=1
-    plt.plot(xr, b, "-", color="black", lw=1)
+    plt.plot(xr, b[-LD:], "-", color="black", lw=1)
 
     
     c = sum ( [ np.sum( sum( [ data[ deps.index(d),:,-1,: ] for d in zones[x] ] ), axis=0 ) for x in zones ] )
@@ -258,7 +258,7 @@ def plot( endroit, total, titre, size=5 ):
         
     plt.grid(True, which="both")
 
-    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+2,1) ]
+    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-LD+2,1) ]
     
     plt.plot(xr,[0.0]*len(xr), color="grey", lw=1)
     
@@ -274,24 +274,24 @@ def plot( endroit, total, titre, size=5 ):
             if z==1: # real data
                 if len(zones)>1:
                     args = { "color":coul[nc], 'lw':1 }
-                    plt.plot(xr, (c[:,0]+c[:,2]+c[:,3])/popx, "o", markersize=2, **args)
+                    plt.plot(xr, (c[-LD+1:,0]+c[-LD+1:,2]+c[-LD+1:,3])/popx, "o", markersize=2, **args)
                 else:
-                    plt.plot(xr, c[:,0]+c[:,2]+c[:,3], "o", markersize=2, color='black')
-                    #plt.plot(xr, c[:,0], "o", markersize=2, color='blue')
-                    #plt.plot(xr, c[:,1], "o", markersize=2, color='crimson')
-                    plt.plot(xr, -c[:,2], "o", markersize=2, color='forestgreen')
-                    plt.plot(xr, -c[:,3], "o", markersize=2, color='mediumvioletred')
+                    plt.plot(xr, c[-LD+1:,0]+c[-LD+1:,2]+c[-LD+1:,3], "o", markersize=2, color='black')
+                    #plt.plot(xr, c[-LD+1:,0], "o", markersize=2, color='blue')
+                    #plt.plot(xr, c[-LD+1:,1], "o", markersize=2, color='crimson')
+                    plt.plot(xr, -c[-LD+1:,2], "o", markersize=2, color='forestgreen')
+                    plt.plot(xr, -c[-LD+1:,3], "o", markersize=2, color='mediumvioletred')
             else:
                 if nc==0 and len(zones)==1:
                     args = { 'lw':1, "path_effects":[path_effects.Stroke(linewidth=2, foreground='white'), path_effects.Normal()] }
-                    plt.plot(xr, c[:,0]+c[:,2]+c[:,3], "-", color='black', label="Nouvelles hospitalisations", **args)
-                    #plt.plot(xr, c[:,0], "-", color='blue', label="Variation du nb de personnes hospitalisées", **args)
-                    #plt.plot(xr, c[:,1], "-", color='crimson', label="Variation du nb de personnes en réanimation", **args)
-                    plt.plot(xr, -c[:,3], "-", color='mediumvioletred', label="- Nb de décès", **args)
-                    plt.plot(xr, -c[:,2], "-", color='forestgreen', label="- Nb de retours à domicile", **args)
+                    plt.plot(xr, c[-LD+1:,0]+c[-LD+1:,2]+c[-LD+1:,3], "-", color='black', label="Nouvelles hospitalisations", **args)
+                    #plt.plot(xr, c[-LD+1:,0], "-", color='blue', label="Variation du nb de personnes hospitalisées", **args)
+                    #plt.plot(xr, c[-LD+1:,1], "-", color='crimson', label="Variation du nb de personnes en réanimation", **args)
+                    plt.plot(xr, -c[-LD+1:,3], "-", color='mediumvioletred', label="- Nb de décès", **args)
+                    plt.plot(xr, -c[-LD+1:,2], "-", color='forestgreen', label="- Nb de retours à domicile", **args)
                 else:
                     args = { "color":coul[nc], "path_effects":[path_effects.Stroke(linewidth=2, foreground='white'), path_effects.Normal()]  }
-                    plt.plot(xr, (c[:,0]+c[:,2]+c[:,3])/popx, "-", **args, label=x, lw=1)
+                    plt.plot(xr, (c[-LD+1:,0]+c[-LD+1:,2]+c[-LD+1:,3])/popx, "-", **args, label=x, lw=1)
 
             nc+=1
             
@@ -316,7 +316,7 @@ def plot( endroit, total, titre, size=5 ):
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
 
         plt.title( tit )
-        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-LD+1,1) ]
 
         plt.plot(xr,[100]*len(xr),"--",zorder=2, color="black",lw=2)
 
@@ -329,8 +329,8 @@ def plot( endroit, total, titre, size=5 ):
             else:
                 args = { "color":'black' }
             z = 100*c[:,1]/l
-            plt.plot(xr, smooth(z), "-", **args, label=x, lw=1)
-            plt.plot(xr, z, "o", markersize=2, **args)
+            plt.plot(xr, smooth(z)[-LD:], "-", **args, label=x, lw=1)
+            plt.plot(xr, z[-LD:], "o", markersize=2, **args)
             nc+=1
 
         plt.grid(True, which="both")
@@ -354,15 +354,15 @@ def plot( endroit, total, titre, size=5 ):
         c1 = sum( [ tests[ deps.index(d),:,0 ] for d in zones[x] ] )
         c2 = sum( [ tests[ deps.index(d),:,1 ] for d in zones[x] ] )
         c = [ 100*ratio(c2[i],c1[i]) for i in range(56,len(c2)-3) ] 
-        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-LD+1,1) ]
         xr = xr[56:-3]
         cs = smooth(c)
         if len(zones)>1:
             args = { "color":coul[nc] }
         else:
             args = { "color":'black' }
-        plt.plot(xr,c, "o", markersize=2, **args)
-        plt.plot(xr,cs, "-", **args, label=x, lw=1)
+        plt.plot(xr, c[-len(xr):], "o", markersize=2, **args)
+        plt.plot(xr, cs[-len(xr):], "-", **args, label=x, lw=1)
         nc+=1
         plt.grid(True, which="both")
         ymax=max(max(cs),ymax)
@@ -388,7 +388,7 @@ def plot( endroit, total, titre, size=5 ):
         c = c/popx # normalisaiton par la population
         c = c[56:-3]
         cs = smooth(c)
-        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-LD+1,1) ]
         xr = xr[56:-3]
         xr2 = xr[6:]
         c2 = [ np.sum( c[t-6:t+1] ) for t in range(6,len(c)) ]  # sum sur les 7 derniers jours (correction bord gauche)
@@ -399,11 +399,11 @@ def plot( endroit, total, titre, size=5 ):
             args = { "color":'black' }
         #plt.plot(xr2,c2, "o", markersize=2, **args)
         if len(zones)>1:
-            plt.plot(xr2,c2, "-", **args, label=x, lw=1)
+            plt.plot(xr2,c2[-len(xr2):], "-", **args, label=x, lw=1)
         else:
-            plt.plot(xr2,c2, "-", **args, label="Taux d'incidence (J-6 $\\rightarrow$ J)", lw=1)
-            plt.plot(xr,7*np.array(c), "o", markersize=2, **args, alpha=0.5)
-            plt.plot(xr,7*np.array(cs), "--", **args, label="$7\\times$nombre de cas", lw=1, alpha=0.5)
+            plt.plot(xr2,c2[-len(xr2):], "-", **args, label="Taux d'incidence (J-6 $\\rightarrow$ J)", lw=1)
+            plt.plot(xr,(7*np.array(c))[-len(xr):], "o", markersize=2, **args, alpha=0.5)
+            plt.plot(xr,(7*np.array(cs))[-len(xr):], "--", **args, label="$7\\times$nombre de cas", lw=1, alpha=0.5)
         nc+=1
     plt.grid(True, which="both")
     #if len(zones)>1:
@@ -426,7 +426,7 @@ def plot( endroit, total, titre, size=5 ):
         c = c/popx # normalisaiton par la population
         c = c[56:-3]
         cs = smooth(c)
-        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+        xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-LD+1,1) ]
         xr = xr[56:-3]
         xr2 = xr[6:]
         c2 = [ np.sum( c[t-6:t+1] ) for t in range(6,len(c)) ]  # sum sur les 7 derniers jours (correction bord gauche)
@@ -436,7 +436,7 @@ def plot( endroit, total, titre, size=5 ):
         else:
             args = { "color":'black' }
         #plt.plot(xr2,c2, "o", markersize=2, **args)
-        plt.plot(xr2,c2, "-", **args, label=x, lw=1)
+        plt.plot(xr2,c2[-len(xr2):], "-", **args, label=x, lw=1)
         nc+=1
     plt.grid(True, which="both")
     plt.yscale('log')
@@ -485,7 +485,7 @@ def plot_deces( titre, size=5 ):
     
     plt.grid(True, which="both")
     
-    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-ld+1,1) ]
+    xr = [ datetime.strptime(dates[-1],"%Y-%m-%d")+timedelta(i) for i in range(-LD+1,1) ]
 
     a = np.zeros(ld)
 
@@ -494,16 +494,14 @@ def plot_deces( titre, size=5 ):
         c = np.sum( sum( [ data[ deps.index(d),:,:,3 ] for d in zones[x] ] ), axis=0 )
         args = { "facecolor":coul[nc] }  
         b = a + c
-        #plt.plot(xr, b, "-", color=coul[nc], alpha=0.1)
-#        plt.fill_between(xr, a, b, alpha=0.5, **args, label=x)
         a=b
         nc+=1
-    plt.fill_between(xr, [0.0]*ld, b, color="red", alpha=0.4, label="A l'hôpital")
-    plt.plot(xr, b, "-", color="red", lw=1, alpha=0.3)
+    plt.fill_between(xr, [0.0]*LD, b[-LD:], color="red", alpha=0.4, label="A l'hôpital")
+    plt.plot(xr, b[-LD:], "-", color="red", lw=1, alpha=0.3)
 
     deces = [ max(deces[i],a[i]) for i in range(len(deces)) ]
-    plt.fill_between(xr, a, deces, color="black", alpha=0.4, label="Hors hôpital (JHU CSSE)")
-    plt.plot(xr, deces, color="black", lw=1)
+    plt.fill_between(xr, a[-LD:], deces[-LD:], color="black", alpha=0.4, label="Hors hôpital (JHU CSSE)")
+    plt.plot(xr, deces[-LD:], color="black", lw=1)
         
     plt.legend(loc='upper left', fontsize=9)
 
@@ -539,14 +537,14 @@ def plot_deces( titre, size=5 ):
         
         plt.grid(True, which="both")
         
-        plt.plot(xr, d_a, "o", markersize=2, color="crimson")
-        plt.plot(xr, s_d_a, color="crimson", lw=1, label="Nombre de décès à l'hôpital")
+        plt.plot(xr, d_a[-len(xr):], "o", markersize=2, color="crimson")
+        plt.plot(xr, s_d_a[-len(xr):], color="crimson", lw=1, label="Nombre de décès à l'hôpital")
 
-        plt.plot(xr, d_deces, "o", markersize=2, color="black")
-        plt.plot(xr, s_d_deces, color="black",lw=1, label='Nombre de décès hors hôpital')
+        plt.plot(xr, d_deces[-len(xr):], "o", markersize=2, color="black")
+        plt.plot(xr, s_d_deces[-len(xr):], color="black",lw=1, label='Nombre de décès hors hôpital')
 
-        plt.plot(xr, np.array(d_a) + np.array(d_deces), "o", markersize=2, color="blue")
-        plt.plot(xr, np.array(s_d_a) + np.array(s_d_deces), color="blue",lw=1, label='Total (JHU CSSE)')
+        plt.plot(xr, (np.array(d_a) + np.array(d_deces))[-len(xr):], "o", markersize=2, color="blue")
+        plt.plot(xr, (np.array(s_d_a) + np.array(s_d_deces))[-len(xr):], color="blue",lw=1, label='Total (JHU CSSE)')
 
         plt.legend(loc='upper right', fontsize=9)
 
@@ -871,6 +869,7 @@ def tension_mort():
 
 deps, genres, dates, data, pop, lits, tests = get_data_from_files()
 ld = len(dates)
+LD = 365 # nombre de jours sur lesquels on trace les courbes
 
 # lissage léger des données
 
@@ -906,8 +905,8 @@ def genere_page():
     fic_md.write("[![](./fig/France_total.png)](./fig/France_total.pdf)<br>\n")
     fic_md.write("\n#### France, par régions (graphiques)<a name=\"france_regions\">\n\n")
     fic_md.write("[![](./fig/France.png)](./fig/France.pdf)<br>\n")
-    #plot( "France", True, "France entière (total)" )
-    #plot( "France", False, "France entière (par régions)" )
+    plot( "France", True, "France entière (total)" )
+    plot( "France", False, "France entière (par régions)" )
     
     print("REGIONS")
     fic_md.write("\n- - - -\n### Régions <a name=\"par_regions\"> ([Retour au sommaire](#top))\n\n")
@@ -923,12 +922,12 @@ def genere_page():
         print(r)
         fic_md.write("\n - - - -\n\n<a name=\""+clean_string(r)+"\"> \n")
         fic_md.write("[![](./fig/"+clean_string(r)+"_total.png)](./fig/"+clean_string(r)+"_total.pdf) <br>\n")
-        #plot( r, True, "Région "+r+" (total)")
+        plot( r, True, "Région "+r+" (total)")
         fic_md.write("\n[Retour au sommaire](#top)\n\n")
         ds = REGIONS[r]
         if len(ds)>1:
             fic_md.write("<a name=\""+clean_string(r)+"_detail\">\n[![](./fig/"+clean_string(r)+".png)](./fig/"+clean_string(r)+".pdf) <br>\n")
-            #plot( r, False, "Région "+r+" (par départements)")
+            plot( r, False, "Région "+r+" (par départements)")
             fic_md.write("\n Par département de la région "+r+"\n\n")
             for d in ds:
                 fic_md.write("- ["+d+": "+DEPARTEMENTS[d]+"](#"+d+")\n")
@@ -957,9 +956,9 @@ def genere_page():
     fic_md.write("[![](./fig/carte_lits_rea.png)](./fig/carte_lits_rea.pdf)")
     fic_md.write("[![](./fig/carte_tension.gif)](./fig/carte_tension.pdf)")
     fic_md.write("[![](./fig/carte_tension_moy.png)](./fig/carte_tension_moy.pdf)<br>\n")
-    fic_md.write("\n - - - -\n#### Mortalité en sortie de l'hôpital, relation avec la tension en réanimation<a name=\"mortalite\">\n")
+    fic_md.write("\n - - - -\n#### Mortalité en sortie de l'hôpital<a name=\"mortalite\">\n")
     fic_md.write("[![](./fig/carte_mortalite.png)](./fig/carte_mortalite.pdf)")
-    fic_md.write("[![](./fig/tension_mort.png)](./fig/tension_mort.pdf)<br>\n")
+    #fic_md.write("[![](./fig/tension_mort.png)](./fig/tension_mort.pdf)<br>\n")
     fic_md.write("\n- - - -\n\n#### Taux d'incidence par départements (nombre de cas sur 7 jours glissants pour 100.000 habitants)<a name=\"incid\">\n")
     fic_md.write("[![](./fig/carte_incid.gif)](./fig/carte_incid.pdf)<br>\n")
     fic_md.write("#### Taux de positivité <a name=\"posit\">\n")
@@ -982,7 +981,7 @@ DPI=70
 
 genere_page()
 
-tension_mort()
+#tension_mort()
 
 cartes()
 
