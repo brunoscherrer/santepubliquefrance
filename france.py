@@ -291,6 +291,10 @@ def plot_france(ax, d, cmap, ax2=None, rg=None, cb_args={ "orientation":'horizon
     if rg==None: # on la détermine automatiquement
         v = [ d[x] for x in d ]
         rg=( min(v), max(v) )
+
+    if ax2!=None:    
+        norm = mpl.colors.Normalize(vmin=rg[0], vmax=rg[1])
+        mpl.colorbar.ColorbarBase(ax2, norm=norm, cmap=cmap, **cb_args)
     
     for x in LISTE_DEPARTEMENTS+['_75','_92','_93','_94']:
         if x[0]=='_':
@@ -308,9 +312,7 @@ def plot_france(ax, d, cmap, ax2=None, rg=None, cb_args={ "orientation":'horizon
             for z in carte[x]:
                 ax.plot(z[:,0],z[:,1],"-",color='black', lw=1)
         
-    plt.tight_layout()
+    #plt.tight_layout()
 
-    if ax2!=None:    
-        norm = mpl.colors.Normalize(vmin=rg[0], vmax=rg[1])
-        mpl.colorbar.ColorbarBase(ax2, norm=norm, cmap=cmap, **cb_args)
+   
         

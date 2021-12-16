@@ -758,6 +758,7 @@ def cartes():
                 z[x]=z[x][-1]
                 
         plot_france(ax, z, cmap, ax2, rg=[zmin[var], zmax[var]])
+    
         
         plt.suptitle(tit, fontsize=13)
         plt.savefig('fig/carte_'+var+'.png',dpi=DPI)
@@ -785,7 +786,7 @@ def cartes():
             ng = len(liste)
             fig = plt.figure(figsize=(ng*7,7))
             plt.suptitle(tit2, fontsize=13)
-            
+
             for i in range(ng):
                 
                 (tit, cmap, var) = liste[i]
@@ -794,14 +795,14 @@ def cartes():
                 plt.title(tit,fontsize=13)
                 
                 ax2 = fig.add_axes([0.05+i*1.0/ng, 0.05, 0.9/ng, 0.03])
-            
+                
                 cmap = cm.get_cmap(cmap)
                 z = dicos[var].copy()
                 for x in deps:
                     z[x]=z[x][ len(z[x])-ld+t ]
-                
-                plot_france(ax, z, cmap, ax2, rg=[zmin[var], zmax[var]], dep_code=True)#(t==ld-1))
 
+                plot_france(ax, z, cmap, ax2, rg=[zmin[var], zmax[var]], dep_code=True)#(t==ld-1))
+                
             plt.savefig('tmp/carte_'+fic+'_%02d.png'%t,dpi=DPI)
             if t==tmax-1:
             #    plt.savefig('fig/carte_'+fic+'.png')
